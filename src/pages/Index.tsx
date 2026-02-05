@@ -152,7 +152,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-               className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
+               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6"
             >
               مبادرة الريادة والإبداع
               <br />
@@ -163,7 +163,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed"
+               className="text-base sm:text-lg md:text-xl text-white/90 mb-6 sm:mb-8 leading-relaxed"
             >
               مبادرة نوعية لتعزيز التطوير المهني للمعلمين وتنمية المهارات التربوية والشخصية لدى الطلاب ضمن بيئة تعليمية محفزة على الإبداع والتميز، مع توظيف الذكاء الاصطناعي والتقنية الحديثة
             </motion.p>
@@ -172,7 +172,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-4"
+               className="flex flex-col sm:flex-row gap-3 sm:gap-4"
             >
               <Link to="/about">
                 <Button size="lg" className="btn-gradient gap-2">
@@ -181,7 +181,7 @@ const Index = () => {
                 </Button>
               </Link>
               <Link to="/programs">
-                <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20">
+                 <Button size="lg" variant="outline" className="bg-white/10 border-white/30 text-white hover:bg-white/20 w-full sm:w-auto">
                   البرامج والدورات
                 </Button>
               </Link>
@@ -232,7 +232,7 @@ const Index = () => {
       {/* Stats Section */}
       <section className="section-padding bg-muted/50">
         <div className="container-custom">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
             {stats.map((stat, index) => (
               <StatsCard
                 key={index}
@@ -254,20 +254,20 @@ const Index = () => {
             subtitle="نسعى لتطوير منظومة تعليمية مبتكرة تواكب تطلعات المستقبل وتنسجم مع رؤية المملكة 2030"
           />
 
-          <div className="grid md:grid-cols-2 gap-8 mt-12">
+           <div className="grid md:grid-cols-2 gap-4 sm:gap-8 mt-8 sm:mt-12">
             {/* Vision */}
             <motion.div
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className="bg-gradient-edu rounded-2xl p-8 text-white"
+               className="bg-gradient-edu rounded-2xl p-5 sm:p-8 text-white"
             >
-              <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center mb-6">
-                <Target size={32} />
+               <div className="w-12 sm:w-16 h-12 sm:h-16 rounded-xl bg-white/20 flex items-center justify-center mb-4 sm:mb-6">
+                 <Target className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-               <h3 className="text-2xl font-bold mb-4">الرؤية</h3>
-              <p className="text-white/90 leading-relaxed">
+               <h3 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">الرؤية</h3>
+               <p className="text-white/90 leading-relaxed text-sm sm:text-base">
                 أن تصبح الشركة نموذجاً وطنياً رائداً في تطبيق الذكاء الاصطناعي، تعتمد على البيانات والتخصيص، وتقديم بيئة تعليمية مبتكرة تتيح تحقيق مستويات أعلى من الأداء للمعلمين والطلاب وأساليب التعليم والابتكار
               </p>
             </motion.div>
@@ -278,13 +278,13 @@ const Index = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-card rounded-2xl p-8 shadow-lg border border-border/30"
+               className="bg-card rounded-2xl p-5 sm:p-8 shadow-lg border border-border/30"
             >
-              <div className="icon-container mb-6">
-                <BookOpen size={32} />
+               <div className="icon-container mb-4 sm:mb-6">
+                 <BookOpen className="w-6 h-6 sm:w-8 sm:h-8" />
               </div>
-               <h3 className="text-2xl font-bold text-foreground mb-4">الرسالة</h3>
-              <p className="text-muted-foreground leading-relaxed">
+               <h3 className="text-xl sm:text-2xl font-bold text-foreground mb-3 sm:mb-4">الرسالة</h3>
+               <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
                 تصميم وتنفيذ برامج تدريبية نوعية ومستدامة تعتمد على أحدث التقنيات، لرفع كفاءة المعلمين والطلاب والإداريين، وتحقيق التميز في المخرجات التعليمية بما يعزز تنافسية المنظمة على المستوى المحلي والعالمي
               </p>
             </motion.div>
@@ -300,7 +300,7 @@ const Index = () => {
             subtitle="نعمل على تحقيق أهداف طموحة تدعم مهارات المستقبل وتحقق تطوراً مستداماً"
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {features.map((feature, index) => (
               <FeatureCard
                 key={index}
@@ -322,7 +322,7 @@ const Index = () => {
             subtitle="نقدم مجموعة متنوعة من البرامج التدريبية للمعلمين والطلاب"
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {programs.map((program, index) => (
               <ProgramCard
                 key={index}
@@ -356,7 +356,7 @@ const Index = () => {
             light
           />
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
             {initiatives.map((initiative, index) => (
               <InitiativeCard
                 key={index}
@@ -382,29 +382,29 @@ const Index = () => {
 
       {/* CTA Section */}
       <section className="section-padding bg-gradient-edu">
-        <div className="container-custom text-center">
+         <div className="container-custom text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <Sparkles className="w-16 h-16 text-white/90 mx-auto mb-6" />
-             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+             <Sparkles className="w-12 sm:w-16 h-12 sm:h-16 text-white/90 mx-auto mb-4 sm:mb-6" />
+             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
               انضم إلينا في رحلة التطوير والإبداع
             </h2>
-            <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
+             <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
               كن جزءاً من مبادرتنا وساهم في بناء مستقبل تعليمي مشرق
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <Link to="/contact">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
+                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2 w-full sm:w-auto">
                   <MessageSquare size={20} />
                   تواصل معنا
                 </Button>
               </Link>
               <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10">
+                 <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 w-full sm:w-auto">
                   واتساب مباشر
                 </Button>
               </a>
