@@ -69,10 +69,10 @@
              initial={{ opacity: 0, height: 0 }}
              animate={{ opacity: 1, height: "auto" }}
              exit={{ opacity: 0, height: 0 }}
-               className="lg:hidden bg-card border-t border-border/50 absolute right-4 left-4 top-20 rounded-xl shadow-lg"
+               className="lg:hidden bg-card border border-border/50 absolute right-4 top-20 w-56 rounded-xl shadow-xl z-50"
            >
                <nav className="py-4 px-4">
-                 <div className="flex flex-col gap-1">
+                 <div className="flex flex-col gap-0.5">
                  {navLinks.map((link) => (
                    <Link
                      key={link.path}

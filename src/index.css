@@ -152,12 +152,12 @@
 
   /* Section Padding */
   .section-padding {
-    @apply py-16 md:py-24 px-4 md:px-8;
+     @apply py-12 sm:py-16 md:py-24 px-3 sm:px-4 md:px-8;
   }
 
   /* Container Max Width */
   .container-custom {
-    @apply max-w-7xl mx-auto;
+     @apply max-w-7xl mx-auto px-3 sm:px-4;
   }
 
   /* Icon Container */
@@ -172,7 +172,7 @@
 
   /* Button Gradient */
   .btn-gradient {
-    @apply bg-gradient-to-l from-primary to-accent text-primary-foreground font-semibold px-6 py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105;
+     @apply bg-gradient-to-l from-primary to-accent text-primary-foreground font-semibold px-4 sm:px-6 py-2.5 sm:py-3 rounded-xl transition-all duration-300 hover:shadow-lg hover:scale-105 text-sm sm:text-base;
   }
 
   /* Navigation Link */
