@@ -19,6 +19,7 @@ import {
   Image,
   MessageSquare,
   Sparkles,
+   Play,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Layout from "@/components/layout/Layout";
@@ -151,7 +152,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl font-cairo font-bold text-white leading-tight mb-6"
+               className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6"
             >
               مبادرة الريادة والإبداع
               <br />
@@ -192,6 +193,42 @@ const Index = () => {
         <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-background to-transparent" />
       </section>
 
+       {/* Video Section */}
+       <section className="section-padding bg-card">
+         <div className="container-custom">
+           <SectionHeader
+             title="تعرف على المبادرة"
+             subtitle="شاهد الفيديو التعريفي لمعرفة المزيد عن رؤيتنا وأهدافنا"
+           />
+ 
+           <motion.div
+             initial={{ opacity: 0, scale: 0.95 }}
+             whileInView={{ opacity: 1, scale: 1 }}
+             viewport={{ once: true }}
+             transition={{ duration: 0.6 }}
+             className="max-w-4xl mx-auto"
+           >
+             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-edu-navy group cursor-pointer">
+               {/* Placeholder for video - can be replaced with actual video later */}
+               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
+               <div className="absolute inset-0 flex items-center justify-center">
+                 <motion.div
+                   whileHover={{ scale: 1.1 }}
+                   whileTap={{ scale: 0.95 }}
+                   className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:bg-white transition-colors"
+                 >
+                   <Play className="w-8 h-8 md:w-10 md:h-10 text-primary mr-[-4px]" fill="currentColor" />
+                 </motion.div>
+               </div>
+               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-edu-navy/90 to-transparent">
+                 <h3 className="text-white text-xl font-bold">فيديو تعريفي بالمبادرة</h3>
+                 <p className="text-white/80 text-sm mt-1">اضغط للمشاهدة</p>
+               </div>
+             </div>
+           </motion.div>
+         </div>
+       </section>
+ 
       {/* Stats Section */}
       <section className="section-padding bg-muted/50">
         <div className="container-custom">
@@ -229,7 +266,7 @@ const Index = () => {
               <div className="w-16 h-16 rounded-xl bg-white/20 flex items-center justify-center mb-6">
                 <Target size={32} />
               </div>
-              <h3 className="text-2xl font-cairo font-bold mb-4">الرؤية</h3>
+               <h3 className="text-2xl font-bold mb-4">الرؤية</h3>
               <p className="text-white/90 leading-relaxed">
                 أن تصبح الشركة نموذجاً وطنياً رائداً في تطبيق الذكاء الاصطناعي، تعتمد على البيانات والتخصيص، وتقديم بيئة تعليمية مبتكرة تتيح تحقيق مستويات أعلى من الأداء للمعلمين والطلاب وأساليب التعليم والابتكار
               </p>
@@ -246,7 +283,7 @@ const Index = () => {
               <div className="icon-container mb-6">
                 <BookOpen size={32} />
               </div>
-              <h3 className="text-2xl font-cairo font-bold text-foreground mb-4">الرسالة</h3>
+               <h3 className="text-2xl font-bold text-foreground mb-4">الرسالة</h3>
               <p className="text-muted-foreground leading-relaxed">
                 تصميم وتنفيذ برامج تدريبية نوعية ومستدامة تعتمد على أحدث التقنيات، لرفع كفاءة المعلمين والطلاب والإداريين، وتحقيق التميز في المخرجات التعليمية بما يعزز تنافسية المنظمة على المستوى المحلي والعالمي
               </p>
@@ -353,7 +390,7 @@ const Index = () => {
             transition={{ duration: 0.5 }}
           >
             <Sparkles className="w-16 h-16 text-white/90 mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-cairo font-bold text-white mb-6">
+             <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
               انضم إلينا في رحلة التطوير والإبداع
             </h2>
             <p className="text-lg text-white/90 mb-8 max-w-2xl mx-auto">
