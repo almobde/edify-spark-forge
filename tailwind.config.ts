@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        cairo: ["Cairo", "sans-serif"],
-        tajawal: ["Tajawal", "sans-serif"],
+         jomhuria: ["Jomhuria", "sans-serif"],
+         kufi: ["Droid Arabic Kufi", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

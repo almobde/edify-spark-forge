@@ -16,7 +16,7 @@
        transition={{ duration: 0.5 }}
        className={`mb-12 ${centered ? "text-center" : ""}`}
      >
-       <h2 className={`text-3xl md:text-4xl font-cairo font-bold mb-4 ${light ? "text-white" : "text-foreground"}`}>
+       <h2 className={`text-3xl md:text-4xl font-bold mb-4 ${light ? "text-white" : "text-foreground"}`}>
          {title}
        </h2>
        {subtitle && (

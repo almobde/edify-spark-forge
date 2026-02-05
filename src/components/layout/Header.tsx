@@ -28,7 +28,7 @@
            <Link to="/" className="flex items-center gap-3">
              <img src={logo} alt="مبادرة الريادة والإبداع" className="h-12 w-12" />
              <div className="hidden sm:block">
-               <h1 className="font-cairo font-bold text-lg text-foreground leading-tight">مبادرة الريادة</h1>
+                 <h1 className="font-bold text-lg text-foreground leading-tight">مبادرة الريادة</h1>
                <p className="text-xs text-muted-foreground">للتطوير المهني والإبداع</p>
              </div>
            </Link>
@@ -69,10 +69,10 @@
              initial={{ opacity: 0, height: 0 }}
              animate={{ opacity: 1, height: "auto" }}
              exit={{ opacity: 0, height: 0 }}
-             className="lg:hidden bg-card border-t border-border/50"
+               className="lg:hidden bg-card border-t border-border/50 absolute right-4 left-4 top-20 rounded-xl shadow-lg"
            >
-             <nav className="container-custom py-4 px-4">
-               <div className="flex flex-col gap-2">
+               <nav className="py-4 px-4">
+                 <div className="flex flex-col gap-1">
                  {navLinks.map((link) => (
                    <Link
                      key={link.path}
