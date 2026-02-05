@@ -1,8 +1,11 @@
  import { Link } from "react-router-dom";
- import { Mail, Phone, MapPin, Facebook, Twitter, Youtube, Instagram } from "lucide-react";
+ import { Mail, Phone, MapPin, Facebook, Twitter, Youtube, Instagram, Settings } from "lucide-react";
+ import { useAuth } from "@/contexts/AuthContext";
  import logo from "@/assets/logo.png";
  
  const Footer = () => {
+   const { isAdmin, isLoading } = useAuth();
+ 
    return (
      <footer className="bg-edu-navy text-white">
        <div className="container-custom section-padding">
@@ -88,6 +91,17 @@
            <p className="text-white/60 text-sm">
              © {new Date().getFullYear()} مبادرة الريادة والإبداع. جميع الحقوق محفوظة
            </p>
+           
+           {/* Hidden Admin Icon - Only visible to admins */}
+           {!isLoading && isAdmin && (
+             <Link 
+               to="/admin" 
+               className="inline-block mt-3 p-1 rounded opacity-30 hover:opacity-100 transition-opacity"
+               title="لوحة الإدارة"
+             >
+               <Settings className="h-3 w-3 text-white/50" />
+             </Link>
+           )}
          </div>
        </div>
      </footer>
