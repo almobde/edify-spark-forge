@@ -146,7 +146,7 @@ export default {
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-edu": "linear-gradient(135deg, hsl(var(--edu-teal)) 0%, hsl(var(--edu-turquoise)) 100%)",
-        "gradient-hero": "linear-gradient(180deg, hsl(var(--edu-navy) / 0.85) 0%, hsl(var(--edu-navy) / 0.7) 50%, hsl(var(--edu-navy) / 0.9) 100%)",
+        "gradient-hero": "linear-gradient(180deg, hsl(var(--edu-navy) / 0.95) 0%, hsl(var(--edu-navy) / 0.88) 50%, hsl(var(--edu-navy) / 0.95) 100%)",
       },
     },
   },
