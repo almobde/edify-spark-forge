@@ -29,6 +29,7 @@ import FeatureCard from "@/components/shared/FeatureCard";
 import InitiativeCard from "@/components/shared/InitiativeCard";
 import ProgramCard from "@/components/shared/ProgramCard";
 import heroBg from "@/assets/hero-bg.jpg";
+import nameCalligraphy from "@/assets/name-calligraphy.png";
 
 // Stats Data
 const stats = [
@@ -137,27 +138,38 @@ const Index = () => {
 
         {/* Content */}
         <div className="relative container-custom px-4 md:px-8 py-20">
-          <div className="max-w-3xl">
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="inline-block bg-secondary/90 text-secondary-foreground px-4 py-2 rounded-full text-sm font-bold mb-6">
-                مبادرة تعليمية رائدة
-              </span>
-            </motion.div>
-
+          <div className="max-w-3xl mx-auto text-center">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6"
+               className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4 sm:mb-6 text-center"
             >
               مبادرة الريادة والإبداع
-              <br />
-              <span className="text-secondary">للتطوير المهني</span>
             </motion.h1>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.15 }}
+              className="text-center mb-2"
+            >
+              <span className="text-secondary text-lg sm:text-xl font-bold">مع المدرب</span>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex justify-center mb-6"
+            >
+              <img
+                src={nameCalligraphy}
+                alt="عبدالعزيز بن محمد الخنين"
+                className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto brightness-0 invert"
+                style={{ filter: "brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(15deg)" }}
+              />
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 30 }}
@@ -172,7 +184,7 @@ const Index = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-               className="flex flex-col sm:flex-row gap-3 sm:gap-4"
+               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center"
             >
               <Link to="/about">
                 <Button size="lg" className="btn-gradient gap-2">
