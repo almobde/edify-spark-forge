@@ -14,8 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-         jomhuria: ["Jomhuria", "sans-serif"],
-         kufi: ["Droid Arabic Kufi", "sans-serif"],
+         tajawal: ["Tajawal", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
