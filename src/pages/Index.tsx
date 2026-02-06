@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
@@ -124,6 +125,22 @@ const initiatives = [
 ];
 
 const Index = () => {
+  const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [showVideo, setShowVideo] = useState(false);
+
+  useEffect(() => {
+    const fetchVideoUrl = async () => {
+      const { supabase } = await import("@/integrations/supabase/client");
+      const { data } = await supabase
+        .from("site_settings")
+        .select("value")
+        .eq("key", "intro_video_url")
+        .maybeSingle();
+      if (data?.value) setVideoUrl(data.value);
+    };
+    fetchVideoUrl();
+  }, []);
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -134,7 +151,7 @@ const Index = () => {
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-hero" />
+        <div className="absolute inset-0 bg-gradient-to-b from-edu-navy/80 via-edu-navy/50 to-edu-navy/85" />
 
         {/* Content */}
         <div className="relative container-custom px-4 md:px-8 py-20">
@@ -166,7 +183,7 @@ const Index = () => {
               <img
                 src={nameCalligraphy}
                 alt="عبدالعزيز بن محمد الخنين"
-                className="h-16 sm:h-20 md:h-24 lg:h-28 w-auto brightness-0 invert"
+                className="h-20 sm:h-24 md:h-32 lg:h-36 w-auto brightness-0 invert"
                 style={{ filter: "brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(15deg)" }}
               />
             </motion.div>
@@ -212,7 +229,7 @@ const Index = () => {
              title="تعرف على المبادرة"
              subtitle="شاهد الفيديو التعريفي لمعرفة المزيد عن رؤيتنا وأهدافنا"
            />
- 
+
            <motion.div
              initial={{ opacity: 0, scale: 0.95 }}
              whileInView={{ opacity: 1, scale: 1 }}
@@ -220,27 +237,38 @@ const Index = () => {
              transition={{ duration: 0.6 }}
              className="max-w-4xl mx-auto"
            >
-             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-edu-navy group cursor-pointer">
-               {/* Placeholder for video - can be replaced with actual video later */}
-               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-               <div className="absolute inset-0 flex items-center justify-center">
-                 <motion.div
-                   whileHover={{ scale: 1.1 }}
-                   whileTap={{ scale: 0.95 }}
-                   className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:bg-white transition-colors"
-                 >
-                   <Play className="w-8 h-8 md:w-10 md:h-10 text-primary mr-[-4px]" fill="currentColor" />
-                 </motion.div>
-               </div>
-               <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-edu-navy/90 to-transparent">
-                 <h3 className="text-white text-xl font-bold">فيديو تعريفي بالمبادرة</h3>
-                 <p className="text-white/80 text-sm mt-1">اضغط للمشاهدة</p>
-               </div>
+             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-edu-navy group">
+               {showVideo && videoUrl ? (
+                 <iframe
+                   src={videoUrl}
+                   className="absolute inset-0 w-full h-full"
+                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                   allowFullScreen
+                   title="فيديو تعريفي بالمبادرة"
+                 />
+               ) : (
+                 <div className="cursor-pointer absolute inset-0" onClick={() => videoUrl && setShowVideo(true)}>
+                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
+                   <div className="absolute inset-0 flex items-center justify-center">
+                     <motion.div
+                       whileHover={{ scale: 1.1 }}
+                       whileTap={{ scale: 0.95 }}
+                       className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:bg-white transition-colors"
+                     >
+                       <Play className="w-8 h-8 md:w-10 md:h-10 text-primary mr-[-4px]" fill="currentColor" />
+                     </motion.div>
+                   </div>
+                   <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-edu-navy/90 to-transparent">
+                     <h3 className="text-white text-xl font-bold">فيديو تعريفي بالمبادرة</h3>
+                     <p className="text-white/80 text-sm mt-1">اضغط للمشاهدة</p>
+                   </div>
+                 </div>
+               )}
              </div>
            </motion.div>
          </div>
        </section>
- 
+
       {/* Stats Section */}
       <section className="section-padding bg-muted/50">
         <div className="container-custom">
