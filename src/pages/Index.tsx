@@ -190,7 +190,11 @@ const Index = () => {
              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-edu-navy group">
                {showVideo && videoUrl ? (
                  <iframe
-                   src={videoUrl}
+                   src={videoUrl
+                     .replace("youtube.com/watch?v=", "youtube.com/embed/")
+                     .replace("youtu.be/", "youtube.com/embed/")
+                     .replace("youtube.com/shorts/", "youtube.com/embed/")
+                   }
                    className="absolute inset-0 w-full h-full"
                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                    allowFullScreen
