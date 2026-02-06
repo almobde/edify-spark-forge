@@ -110,7 +110,7 @@
 
   body {
      @apply bg-background text-foreground;
-     font-family: 'Droid Arabic Kufi', 'Jomhuria', sans-serif;
+     font-family: 'Jomhuria', sans-serif !important;
     direction: rtl;
   }
 
@@ -119,7 +119,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-     font-family: 'Droid Arabic Kufi', 'Jomhuria', sans-serif;
+     font-family: 'Jomhuria', sans-serif !important;
      @apply font-bold;
   }
 }
