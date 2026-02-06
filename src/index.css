@@ -105,21 +105,27 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: 'Tajawal', sans-serif !important;
   }
 
   body {
      @apply bg-background text-foreground;
-     font-family: 'Tajawal', sans-serif;
+     font-family: 'Tajawal', sans-serif !important;
     direction: rtl;
   }
 
   html {
     scroll-behavior: smooth;
+    font-family: 'Tajawal', sans-serif !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
-     font-family: 'Tajawal', sans-serif;
+     font-family: 'Tajawal', sans-serif !important;
      @apply font-bold;
+  }
+
+  input, textarea, select, button {
+    font-family: 'Tajawal', sans-serif !important;
   }
 }
 
