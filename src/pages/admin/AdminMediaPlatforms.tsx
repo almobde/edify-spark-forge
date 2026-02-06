@@ -23,18 +23,20 @@
  } from "@/components/ui/table";
  import { supabase } from "@/integrations/supabase/client";
  import { useToast } from "@/hooks/use-toast";
- import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
  
- interface MediaPlatform {
-   id: string;
-   title: string;
-   description: string | null;
-   features: string[] | null;
-   link: string | null;
-   icon: string | null;
-   is_visible: boolean | null;
-   order_index: number | null;
- }
+interface MediaPlatform {
+    id: string;
+    title: string;
+    description: string | null;
+    features: string[] | null;
+    link: string | null;
+    icon: string | null;
+    image_url: string | null;
+    is_visible: boolean | null;
+    order_index: number | null;
+  }
  
  export default function AdminMediaPlatforms() {
    const [platforms, setPlatforms] = useState<MediaPlatform[]>([]);
@@ -46,10 +48,11 @@
      description: "",
      features: "",
      link: "",
-     icon: "Globe",
-     is_visible: true,
-   });
-   const [isSaving, setIsSaving] = useState(false);
+      icon: "Globe",
+      image_url: "",
+      is_visible: true,
+    });
+    const [isSaving, setIsSaving] = useState(false);
    const { toast } = useToast();
  
    const fetchPlatforms = async () => {
@@ -83,10 +86,11 @@
        description: "",
        features: "",
        link: "",
-       icon: "Globe",
-       is_visible: true,
-     });
-     setEditingPlatform(null);
+        icon: "Globe",
+        image_url: "",
+        is_visible: true,
+      });
+      setEditingPlatform(null);
    };
  
    const handleEdit = (platform: MediaPlatform) => {
@@ -96,8 +100,9 @@
        description: platform.description || "",
        features: platform.features?.join("\n") || "",
        link: platform.link || "",
-       icon: platform.icon || "Globe",
-       is_visible: platform.is_visible ?? true,
+        icon: platform.icon || "Globe",
+        image_url: platform.image_url || "",
+        is_visible: platform.is_visible ?? true,
      });
      setIsDialogOpen(true);
    };
@@ -127,10 +132,11 @@
              description: formData.description,
              features: featuresArray,
              link: formData.link,
-             icon: formData.icon,
-             is_visible: formData.is_visible,
-           })
-           .eq("id", editingPlatform.id);
+              icon: formData.icon,
+              image_url: formData.image_url || null,
+              is_visible: formData.is_visible,
+            })
+            .eq("id", editingPlatform.id);
  
          if (error) throw error;
          toast({ title: "تم التحديث", description: "تم تحديث المنصة بنجاح" });
@@ -140,9 +146,10 @@
            description: formData.description,
            features: featuresArray,
            link: formData.link,
-           icon: formData.icon,
-           is_visible: formData.is_visible,
-           order_index: platforms.length,
+            icon: formData.icon,
+            image_url: formData.image_url || null,
+            is_visible: formData.is_visible,
+            order_index: platforms.length,
          });
  
          if (error) throw error;

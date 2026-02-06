@@ -23,7 +23,8 @@
  } from "@/components/ui/table";
  import { supabase } from "@/integrations/supabase/client";
  import { useToast } from "@/hooks/use-toast";
- import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
  
  interface Program {
    id: string;
@@ -47,10 +48,11 @@
      description: "",
      duration: "",
      category: "",
-     icon: "BookOpen",
-     is_visible: true,
-   });
-   const [isSaving, setIsSaving] = useState(false);
+      icon: "BookOpen",
+      image_url: "",
+      is_visible: true,
+    });
+    const [isSaving, setIsSaving] = useState(false);
    const { toast } = useToast();
  
    const fetchPrograms = async () => {
@@ -84,10 +86,11 @@
        description: "",
        duration: "",
        category: "",
-       icon: "BookOpen",
-       is_visible: true,
-     });
-     setEditingProgram(null);
+        icon: "BookOpen",
+        image_url: "",
+        is_visible: true,
+      });
+      setEditingProgram(null);
    };
  
    const handleEdit = (program: Program) => {
@@ -97,8 +100,9 @@
        description: program.description || "",
        duration: program.duration || "",
        category: program.category || "",
-       icon: program.icon || "BookOpen",
-       is_visible: program.is_visible ?? true,
+        icon: program.icon || "BookOpen",
+        image_url: program.image_url || "",
+        is_visible: program.is_visible ?? true,
      });
      setIsDialogOpen(true);
    };
@@ -123,10 +127,11 @@
              description: formData.description,
              duration: formData.duration,
              category: formData.category,
-             icon: formData.icon,
-             is_visible: formData.is_visible,
-           })
-           .eq("id", editingProgram.id);
+              icon: formData.icon,
+              image_url: formData.image_url || null,
+              is_visible: formData.is_visible,
+            })
+            .eq("id", editingProgram.id);
  
          if (error) throw error;
          toast({ title: "تم التحديث", description: "تم تحديث البرنامج بنجاح" });
@@ -136,9 +141,10 @@
            description: formData.description,
            duration: formData.duration,
            category: formData.category,
-           icon: formData.icon,
-           is_visible: formData.is_visible,
-           order_index: programs.length,
+            icon: formData.icon,
+            image_url: formData.image_url || null,
+            is_visible: formData.is_visible,
+            order_index: programs.length,
          });
  
          if (error) throw error;
@@ -256,8 +262,14 @@
                      />
                    </div>
                  </div>
-                 <div className="flex items-center justify-between">
-                   <Label htmlFor="visible">مرئي على الموقع</Label>
+                  <ImageUpload
+                    value={formData.image_url}
+                    onChange={(url) => setFormData({ ...formData, image_url: url })}
+                    label="صورة البرنامج"
+                    folder="programs"
+                  />
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="visible">مرئي على الموقع</Label>
                    <Switch
                      id="visible"
                      checked={formData.is_visible}
