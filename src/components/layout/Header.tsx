@@ -69,7 +69,7 @@
              initial={{ opacity: 0, height: 0 }}
              animate={{ opacity: 1, height: "auto" }}
              exit={{ opacity: 0, height: 0 }}
-               className="lg:hidden bg-card border border-border/50 absolute right-4 top-20 w-56 rounded-xl shadow-xl z-50"
+               className="lg:hidden bg-card border border-border/50 absolute left-4 top-20 w-56 rounded-xl shadow-xl z-50"
            >
                <nav className="py-4 px-4">
                  <div className="flex flex-col gap-0.5">
