@@ -385,13 +385,6 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <Sparkles className="w-12 sm:w-16 h-12 sm:h-16 text-white/90 mx-auto mb-4 sm:mb-6" />
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
-              انضم إلينا في رحلة التطوير والإبداع
-            </h2>
-            <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
-              كن جزءاً من مبادرتنا وساهم في بناء مستقبل تعليمي مشرق
-            </p>
             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
                 <Button size="lg" className="bg-[#25D366] text-white hover:bg-[#1da851] font-bold gap-2 w-full sm:w-auto">
