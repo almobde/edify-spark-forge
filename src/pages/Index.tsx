@@ -121,7 +121,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-center mb-2"
             >
-              <span className="text-lg sm:text-xl font-bold" style={{ color: "hsl(45, 90%, 55%)" }}>مع المدرب</span>
+              <span className="text-lg sm:text-xl font-bold" style={{ color: "#d4a017" }}>مع المدرب</span>
             </motion.div>
 
             <motion.div
@@ -133,8 +133,8 @@ const Index = () => {
               <img
                 src={nameCalligraphy}
                 alt="عبدالعزيز بن محمد الخنين"
-                className="h-20 sm:h-24 md:h-32 lg:h-36 w-auto brightness-0 invert"
-                style={{ filter: "brightness(0) invert(1) sepia(1) saturate(5) hue-rotate(15deg)" }}
+                className="h-20 sm:h-24 md:h-32 lg:h-36 w-auto"
+                style={{ filter: "brightness(0) invert(0.83) sepia(1) saturate(3) hue-rotate(10deg)" }}
               />
             </motion.div>
 
