@@ -31,7 +31,8 @@ import InitiativeCard from "@/components/shared/InitiativeCard";
 import ProgramCard from "@/components/shared/ProgramCard";
 import heroBg from "@/assets/hero-bg.jpg";
 import nameCalligraphy from "@/assets/name-calligraphy.png";
-
+import { supabase } from "@/integrations/supabase/client";
+import { LucideIcon } from "lucide-react";
 // Stats Data
 const stats = [
   { icon: Users, value: "+600", label: "مستفيد" },
@@ -64,81 +65,30 @@ const features = [
   },
 ];
 
-// Programs Data
-const programs = [
-  {
-    icon: Presentation,
-    title: "تدريب المدربين TOT",
-    description: "برنامج متقدم لتأهيل القادة التربويين وإكسابهم مهارات التدريب الاحترافي",
-    category: "teachers" as const,
-    duration: "5 أيام",
-  },
-  {
-    icon: Brain,
-    title: "توظيف الذكاء الاصطناعي",
-    description: "دورة شاملة في استخدام أدوات الذكاء الاصطناعي في العملية التعليمية",
-    category: "teachers" as const,
-    duration: "3 أيام",
-  },
-  {
-    icon: Lightbulb,
-    title: "التفكير الإبداعي وحل المشكلات",
-    description: "تطوير مهارات التفكير الإبداعي والنقدي لدى الطلاب",
-    category: "students" as const,
-    duration: "يومين",
-  },
-  {
-    icon: Globe,
-    title: "برمجة المواقع الإلكترونية",
-    description: "تعلم أساسيات تطوير المواقع باستخدام أحدث التقنيات",
-    category: "digital" as const,
-    duration: "4 أيام",
-  },
-];
+const iconMap: Record<string, LucideIcon> = {
+  Presentation, Brain, Lightbulb, Globe, Heart, FileEdit, Image, PenTool,
+  GraduationCap, Users, Award, TrendingUp, BookOpen, Cpu, Target,
+};
 
-// Initiatives Data
-const initiatives = [
-  {
-    icon: Presentation,
-    title: "100 عرض تقديمي تعليمي",
-    description: "إنشاء 100 عرض بوربوينت يقدمها المعلمون أو الطلاب، تُستخدم في الدروس وتُتاح للجميع",
-    impact: "ارتفاع جودة الشرح والتفاعل داخل الصف",
-  },
-  {
-    icon: Heart,
-    title: "100 مشروع تطوعي",
-    description: "طلاب المدرسة ينفذون 100 مشروع تطوعي بسيط (تنظيم، تنظيف، مساعدة، توعية، دعم…)",
-    impact: "مدرسة متعاونة يسودها احترام وانتماء قوي",
-  },
-  {
-    icon: FileEdit,
-    title: "100 مقال مفيد",
-    description: "مقالات يكتبها الطلاب بأنفسهم في منصة مدرسية خاصة، مع التأكد من أصالتها",
-    impact: "جيل قارئ وواع قادر على التعبير والتحليل",
-  },
-  {
-    icon: Image,
-    title: "100 صورة احترافية",
-    description: "يصنعون الطلاب صورة احترافية (تصوير – تصميم – تعديل) تعبر عن رسائل ومفاهيم تربوية",
-    impact: "معرض بصري مذهل يبرز مواهب المدرسة الفنية",
-  },
-];
-
+const getIcon = (name: string | null): LucideIcon => (name && iconMap[name]) || Lightbulb;
 const Index = () => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [showVideo, setShowVideo] = useState(false);
+  const [dbPrograms, setDbPrograms] = useState<any[]>([]);
+  const [dbInitiatives, setDbInitiatives] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchVideoUrl = async () => {
-      const { supabase } = await import("@/integrations/supabase/client");
-      const { data } = await supabase
-        .from("site_settings")
-        .select("value")
-        .eq("key", "intro_video_url")
-        .maybeSingle();
-      if (data?.value) setVideoUrl(data.value);
+    const fetchData = async () => {
+      const [videoRes, programsRes, initiativesRes] = await Promise.all([
+        supabase.from("site_settings").select("value").eq("key", "intro_video_url").maybeSingle(),
+        supabase.from("programs").select("*").eq("is_visible", true).order("order_index").limit(4),
+        supabase.from("initiatives").select("*").eq("is_visible", true).order("order_index").limit(4),
+      ]);
+      if (videoRes.data?.value) setVideoUrl(videoRes.data.value);
+      if (programsRes.data) setDbPrograms(programsRes.data);
+      if (initiativesRes.data) setDbInitiatives(initiativesRes.data);
     };
-    fetchVideoUrl();
+    fetchData();
   }, []);
 
   return (
@@ -151,7 +101,7 @@ const Index = () => {
           style={{ backgroundImage: `url(${heroBg})` }}
         />
         {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-b from-edu-navy/80 via-edu-navy/50 to-edu-navy/85" />
+        <div className="absolute inset-0 bg-gradient-to-b from-edu-navy/90 via-edu-navy/65 to-edu-navy/90" />
 
         {/* Content */}
         <div className="relative container-custom px-4 md:px-8 py-20">
@@ -171,7 +121,7 @@ const Index = () => {
               transition={{ duration: 0.6, delay: 0.15 }}
               className="text-center mb-2"
             >
-              <span className="text-secondary text-lg sm:text-xl font-bold">مع المدرب</span>
+              <span className="text-lg sm:text-xl font-bold" style={{ color: "hsl(45, 90%, 55%)" }}>مع المدرب</span>
             </motion.div>
 
             <motion.div
@@ -363,14 +313,15 @@ const Index = () => {
           />
 
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {programs.map((program, index) => (
+            {dbPrograms.map((program, index) => (
               <ProgramCard
-                key={index}
-                icon={program.icon}
+                key={program.id}
+                icon={getIcon(program.icon)}
                 title={program.title}
-                description={program.description}
-                category={program.category}
-                duration={program.duration}
+                description={program.description || ""}
+                category={(program.category as "teachers" | "students" | "digital") || "teachers"}
+                duration={program.duration || undefined}
+                imageUrl={program.image_url || undefined}
                 delay={index * 0.1}
               />
             ))}
@@ -397,13 +348,14 @@ const Index = () => {
           />
 
            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {initiatives.map((initiative, index) => (
+            {dbInitiatives.map((initiative, index) => (
               <InitiativeCard
-                key={index}
-                icon={initiative.icon}
+                key={initiative.id}
+                icon={getIcon(initiative.icon)}
                 title={initiative.title}
-                description={initiative.description}
-                impact={initiative.impact}
+                description={initiative.short_description || ""}
+                impact={initiative.impact || undefined}
+                imageUrl={initiative.image_url || undefined}
                 delay={index * 0.1}
               />
             ))}
