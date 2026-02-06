@@ -87,30 +87,19 @@
          </div>
  
          {/* Copyright */}
-         <div className="border-t border-white/10 mt-12 pt-8 text-center">
-           <p className="text-white/60 text-sm">
-             © {new Date().getFullYear()} مبادرة الريادة والإبداع. جميع الحقوق محفوظة
-           </p>
-           
-          {/* Hidden Admin Icon - visible to admins only */}
-            {!isLoading && isAdmin && (
-              <Link 
-                to="/admin" 
-                className="inline-flex items-center justify-center mt-3 p-1.5 rounded opacity-20 hover:opacity-80 transition-opacity"
-                title="لوحة الإدارة"
-              >
-                <Settings className="h-4 w-4 text-white/40" />
-              </Link>
-            )}
-            {/* Fallback: always show a tiny dot for admin login access */}
-            {!isLoading && !isAdmin && (
-              <Link
-                to="/admin/login"
-                className="inline-block mt-3 w-2 h-2 rounded-full opacity-10 hover:opacity-50 transition-opacity"
-                title="دخول"
-              />
-            )}
-         </div>
+          <div className="border-t border-white/10 mt-12 pt-8 text-center">
+            <p className="text-white/60 text-sm">
+              © {new Date().getFullYear()} مبادرة الريادة والإبداع. جميع الحقوق محفوظة
+            </p>
+            
+            <Link 
+              to={!isLoading && isAdmin ? "/admin" : "/admin/login"}
+              className="inline-flex items-center justify-center mt-4 p-2 rounded-full hover:bg-white/10 transition-all"
+              title="لوحة الإدارة"
+            >
+              <Settings className="h-4 w-4 text-white/30 hover:text-white/70 transition-colors" />
+            </Link>
+          </div>
        </div>
      </footer>
    );
