@@ -378,30 +378,37 @@ const Index = () => {
 
       {/* CTA Section */}
       <section className="section-padding bg-gradient-edu">
-         <div className="container-custom text-center px-4">
+        <div className="container-custom text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-             <Sparkles className="w-12 sm:w-16 h-12 sm:h-16 text-white/90 mx-auto mb-4 sm:mb-6" />
-             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
+            <Sparkles className="w-12 sm:w-16 h-12 sm:h-16 text-white/90 mx-auto mb-4 sm:mb-6" />
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-4 sm:mb-6">
               انضم إلينا في رحلة التطوير والإبداع
             </h2>
-             <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
+            <p className="text-base sm:text-lg text-white/90 mb-6 sm:mb-8 max-w-2xl mx-auto">
               كن جزءاً من مبادرتنا وساهم في بناء مستقبل تعليمي مشرق
             </p>
-             <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
-              <Link to="/contact">
-                 <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2 w-full sm:w-auto">
-                  <MessageSquare size={20} />
-                  تواصل معنا
-                </Button>
-              </Link>
+            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
               <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold w-full sm:w-auto">
-                  واتساب مباشر
+                <Button size="lg" className="bg-[#25D366] text-white hover:bg-[#1da851] font-bold gap-2 w-full sm:w-auto">
+                  <MessageSquare size={20} />
+                  واتساب
+                </Button>
+              </a>
+              <a href="https://chatgpt.com/g/g-688c9a848f508191bd1b04c19f5652e9-ldhk-lstn-y-m-bd-l-zyz-lkhnyn" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2 w-full sm:w-auto">
+                  <Cpu size={20} />
+                  تواصل معي ChatGPT
+                </Button>
+              </a>
+              <a href="https://almobde.com" target="_blank" rel="noopener noreferrer">
+                <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold gap-2 w-full sm:w-auto">
+                  <Globe size={20} />
+                  موقع المدرب
                 </Button>
               </a>
             </div>
