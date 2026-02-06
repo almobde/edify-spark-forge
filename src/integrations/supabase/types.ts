@@ -69,6 +69,7 @@ export type Database = {
           features: string[] | null
           icon: string | null
           id: string
+          image_url: string | null
           is_visible: boolean | null
           link: string | null
           order_index: number | null
@@ -81,6 +82,7 @@ export type Database = {
           features?: string[] | null
           icon?: string | null
           id?: string
+          image_url?: string | null
           is_visible?: boolean | null
           link?: string | null
           order_index?: number | null
@@ -93,6 +95,7 @@ export type Database = {
           features?: string[] | null
           icon?: string | null
           id?: string
+          image_url?: string | null
           is_visible?: boolean | null
           link?: string | null
           order_index?: number | null

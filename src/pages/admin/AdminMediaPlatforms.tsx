@@ -33,7 +33,7 @@ interface MediaPlatform {
     features: string[] | null;
     link: string | null;
     icon: string | null;
-    image_url: string | null;
+    image_url?: string | null;
     is_visible: boolean | null;
     order_index: number | null;
   }

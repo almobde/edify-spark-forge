@@ -296,8 +296,14 @@ import ImageUpload from "@/components/admin/ImageUpload";
                      onChange={(e) => setFormData({ ...formData, target_audience: e.target.value })}
                      placeholder="مثال: الطلاب والمعلمين"
                    />
-                 </div>
-                 <div className="flex items-center justify-between">
+                  </div>
+                  <ImageUpload
+                    value={formData.image_url}
+                    onChange={(url) => setFormData({ ...formData, image_url: url })}
+                    label="صورة المبادرة"
+                    folder="initiatives"
+                  />
+                  <div className="flex items-center justify-between">
                    <Label htmlFor="visible">مرئي على الموقع</Label>
                    <Switch
                      id="visible"
