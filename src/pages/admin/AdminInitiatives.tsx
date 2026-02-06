@@ -23,7 +23,8 @@
  } from "@/components/ui/table";
  import { supabase } from "@/integrations/supabase/client";
  import { useToast } from "@/hooks/use-toast";
- import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import { Plus, Pencil, Trash2, Loader2 } from "lucide-react";
+import ImageUpload from "@/components/admin/ImageUpload";
  
  interface Initiative {
    id: string;
@@ -51,10 +52,11 @@
      objectives: "",
      impact: "",
      target_audience: "",
-     icon: "Lightbulb",
-     is_visible: true,
-   });
-   const [isSaving, setIsSaving] = useState(false);
+      icon: "Lightbulb",
+      image_url: "",
+      is_visible: true,
+    });
+    const [isSaving, setIsSaving] = useState(false);
    const { toast } = useToast();
  
    const fetchInitiatives = async () => {
@@ -90,10 +92,11 @@
        objectives: "",
        impact: "",
        target_audience: "",
-       icon: "Lightbulb",
-       is_visible: true,
-     });
-     setEditingInitiative(null);
+        icon: "Lightbulb",
+        image_url: "",
+        is_visible: true,
+      });
+      setEditingInitiative(null);
    };
  
    const handleEdit = (initiative: Initiative) => {
@@ -105,8 +108,9 @@
        objectives: initiative.objectives?.join("\n") || "",
        impact: initiative.impact || "",
        target_audience: initiative.target_audience || "",
-       icon: initiative.icon || "Lightbulb",
-       is_visible: initiative.is_visible ?? true,
+        icon: initiative.icon || "Lightbulb",
+        image_url: initiative.image_url || "",
+        is_visible: initiative.is_visible ?? true,
      });
      setIsDialogOpen(true);
    };
@@ -138,10 +142,11 @@
              objectives: objectivesArray,
              impact: formData.impact,
              target_audience: formData.target_audience,
-             icon: formData.icon,
-             is_visible: formData.is_visible,
-           })
-           .eq("id", editingInitiative.id);
+              icon: formData.icon,
+              image_url: formData.image_url || null,
+              is_visible: formData.is_visible,
+            })
+            .eq("id", editingInitiative.id);
  
          if (error) throw error;
          toast({ title: "تم التحديث", description: "تم تحديث المبادرة بنجاح" });
@@ -153,9 +158,10 @@
            objectives: objectivesArray,
            impact: formData.impact,
            target_audience: formData.target_audience,
-           icon: formData.icon,
-           is_visible: formData.is_visible,
-           order_index: initiatives.length,
+            icon: formData.icon,
+            image_url: formData.image_url || null,
+            is_visible: formData.is_visible,
+            order_index: initiatives.length,
          });
  
          if (error) throw error;
