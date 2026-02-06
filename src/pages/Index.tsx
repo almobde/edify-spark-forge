@@ -371,7 +371,7 @@ const Index = () => {
 
           <div className="text-center mt-12">
             <Link to="/initiatives">
-              <Button size="lg" variant="outline" className="border-white/30 text-white hover:bg-white/10 gap-2">
+              <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 gap-2 font-bold">
                 <span>استكشف جميع المبادرات</span>
                 <ChevronLeft size={20} />
               </Button>
@@ -404,7 +404,7 @@ const Index = () => {
                 </Button>
               </Link>
               <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
-                 <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 w-full sm:w-auto">
+                <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold w-full sm:w-auto">
                   واتساب مباشر
                 </Button>
               </a>

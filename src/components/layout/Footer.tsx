@@ -92,16 +92,24 @@
              © {new Date().getFullYear()} مبادرة الريادة والإبداع. جميع الحقوق محفوظة
            </p>
            
-           {/* Hidden Admin Icon - Only visible to admins */}
-           {!isLoading && isAdmin && (
-             <Link 
-               to="/admin" 
-               className="inline-block mt-3 p-1 rounded opacity-30 hover:opacity-100 transition-opacity"
-               title="لوحة الإدارة"
-             >
-               <Settings className="h-3 w-3 text-white/50" />
-             </Link>
-           )}
+          {/* Hidden Admin Icon - visible to admins only */}
+            {!isLoading && isAdmin && (
+              <Link 
+                to="/admin" 
+                className="inline-flex items-center justify-center mt-3 p-1.5 rounded opacity-20 hover:opacity-80 transition-opacity"
+                title="لوحة الإدارة"
+              >
+                <Settings className="h-4 w-4 text-white/40" />
+              </Link>
+            )}
+            {/* Fallback: always show a tiny dot for admin login access */}
+            {!isLoading && !isAdmin && (
+              <Link
+                to="/admin/login"
+                className="inline-block mt-3 w-2 h-2 rounded-full opacity-10 hover:opacity-50 transition-opacity"
+                title="دخول"
+              />
+            )}
          </div>
        </div>
      </footer>
