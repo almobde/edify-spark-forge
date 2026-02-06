@@ -385,21 +385,21 @@ const Index = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
           >
-            <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
+            <div className="flex flex-row justify-center gap-3">
               <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-[#25D366] text-white hover:bg-[#1da851] font-bold gap-2 w-full sm:w-auto">
+                <Button size="lg" className="bg-[#d4a017] text-white hover:bg-[#b8890f] font-bold gap-2">
                   <MessageSquare size={20} />
                   واتساب
                 </Button>
               </a>
               <a href="https://chatgpt.com/g/g-688c9a848f508191bd1b04c19f5652e9-ldhk-lstn-y-m-bd-l-zyz-lkhnyn" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2 w-full sm:w-auto">
+                <Button size="lg" className="bg-[#d4a017] text-white hover:bg-[#b8890f] font-bold gap-2">
                   <Cpu size={20} />
                   تواصل معي ChatGPT
                 </Button>
               </a>
               <a href="https://almobde.com" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-secondary text-secondary-foreground hover:bg-secondary/90 font-bold gap-2 w-full sm:w-auto">
+                <Button size="lg" className="bg-[#d4a017] text-white hover:bg-[#b8890f] font-bold gap-2">
                   <Globe size={20} />
                   موقع المدرب
                 </Button>
