@@ -1,12 +1,13 @@
- import { useEffect, useState } from "react";
- import AdminLayout from "@/components/admin/AdminLayout";
- import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
- import { Button } from "@/components/ui/button";
- import { Input } from "@/components/ui/input";
- import { Label } from "@/components/ui/label";
- import { supabase } from "@/integrations/supabase/client";
- import { useToast } from "@/hooks/use-toast";
- import { Loader2, Save } from "lucide-react";
+import { useEffect, useState } from "react";
+import AdminLayout from "@/components/admin/AdminLayout";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { supabase } from "@/integrations/supabase/client";
+import { useToast } from "@/hooks/use-toast";
+import { Loader2, Save, Upload } from "lucide-react";
  
  interface Setting {
    id: string;
@@ -20,18 +21,20 @@
    { key: "site_description", label: "وصف الموقع", type: "text" },
    { key: "contact_email", label: "البريد الإلكتروني", type: "text" },
    { key: "contact_phone", label: "رقم الهاتف", type: "text" },
-   { key: "intro_video_url", label: "رابط الفيديو التعريفي", type: "text" },
-   { key: "facebook_url", label: "رابط فيسبوك", type: "text" },
+  { key: "intro_video_url", label: "رابط الفيديو التعريفي", type: "text" },
+  { key: "intro_video_type", label: "نوع الفيديو", type: "text" },
+  { key: "facebook_url", label: "رابط فيسبوك", type: "text" },
    { key: "twitter_url", label: "رابط تويتر", type: "text" },
    { key: "instagram_url", label: "رابط انستغرام", type: "text" },
    { key: "youtube_url", label: "رابط يوتيوب", type: "text" },
  ];
  
  export default function AdminSettings() {
-   const [settings, setSettings] = useState<Record<string, string>>({});
-   const [isLoading, setIsLoading] = useState(true);
-   const [isSaving, setIsSaving] = useState(false);
-   const { toast } = useToast();
+  const [settings, setSettings] = useState<Record<string, string>>({});
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isUploading, setIsUploading] = useState(false);
+  const { toast } = useToast();
  
    const fetchSettings = async () => {
      try {
@@ -195,24 +198,82 @@
              </CardContent>
            </Card>
  
-           <Card>
-             <CardHeader>
-               <CardTitle>الوسائط</CardTitle>
-               <CardDescription>روابط الفيديو والوسائط</CardDescription>
-             </CardHeader>
-             <CardContent className="space-y-4">
-               <div className="space-y-2">
-                 <Label htmlFor="intro_video_url">رابط الفيديو التعريفي</Label>
-                 <Input
-                   id="intro_video_url"
-                   value={settings.intro_video_url || ""}
-                   onChange={(e) => setSettings({ ...settings, intro_video_url: e.target.value })}
-                   placeholder="https://www.youtube.com/embed/..."
-                   dir="ltr"
-                 />
-               </div>
-             </CardContent>
-           </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>الوسائط</CardTitle>
+                <CardDescription>الفيديو التعريفي - يمكنك رفع فيديو مباشرة أو إضافة رابط يوتيوب</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label>نوع الفيديو</Label>
+                  <RadioGroup
+                    value={settings.intro_video_type || "youtube"}
+                    onValueChange={(val) => setSettings({ ...settings, intro_video_type: val })}
+                    className="flex gap-4"
+                  >
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="youtube" id="vt-youtube" />
+                      <Label htmlFor="vt-youtube">رابط يوتيوب</Label>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <RadioGroupItem value="upload" id="vt-upload" />
+                      <Label htmlFor="vt-upload">رفع فيديو</Label>
+                    </div>
+                  </RadioGroup>
+                </div>
+
+                {(settings.intro_video_type || "youtube") === "youtube" ? (
+                  <div className="space-y-2">
+                    <Label htmlFor="intro_video_url">رابط يوتيوب</Label>
+                    <Input
+                      id="intro_video_url"
+                      value={settings.intro_video_url || ""}
+                      onChange={(e) => setSettings({ ...settings, intro_video_url: e.target.value })}
+                      placeholder="https://www.youtube.com/watch?v=..."
+                      dir="ltr"
+                    />
+                  </div>
+                ) : (
+                  <div className="space-y-2">
+                    <Label>رفع ملف فيديو</Label>
+                    <div className="flex items-center gap-3">
+                      <Input
+                        type="file"
+                        accept="video/*"
+                        disabled={isUploading}
+                        onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          setIsUploading(true);
+                          try {
+                            const ext = file.name.split(".").pop();
+                            const path = `videos/intro-${Date.now()}.${ext}`;
+                            const { error: uploadError } = await supabase.storage
+                              .from("media")
+                              .upload(path, file, { upsert: true });
+                            if (uploadError) throw uploadError;
+                            const { data: urlData } = supabase.storage
+                              .from("media")
+                              .getPublicUrl(path);
+                            setSettings({ ...settings, intro_video_url: urlData.publicUrl });
+                            toast({ title: "تم الرفع", description: "تم رفع الفيديو بنجاح" });
+                          } catch (err) {
+                            console.error(err);
+                            toast({ title: "خطأ", description: "فشل في رفع الفيديو", variant: "destructive" });
+                          } finally {
+                            setIsUploading(false);
+                          }
+                        }}
+                      />
+                      {isUploading && <Loader2 className="h-4 w-4 animate-spin" />}
+                    </div>
+                    {settings.intro_video_url && (settings.intro_video_type === "upload") && (
+                      <p className="text-sm text-muted-foreground truncate" dir="ltr">{settings.intro_video_url}</p>
+                    )}
+                  </div>
+                )}
+              </CardContent>
+            </Card>
  
            <Card>
              <CardHeader>
