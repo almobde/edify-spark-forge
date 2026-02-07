@@ -73,18 +73,21 @@ const iconMap: Record<string, LucideIcon> = {
 const getIcon = (name: string | null): LucideIcon => (name && iconMap[name]) || Lightbulb;
 const Index = () => {
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
+  const [videoType, setVideoType] = useState<string>("youtube"); // "youtube" | "upload"
   const [showVideo, setShowVideo] = useState(false);
   const [dbPrograms, setDbPrograms] = useState<any[]>([]);
   const [dbInitiatives, setDbInitiatives] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const [videoRes, programsRes, initiativesRes] = await Promise.all([
+      const [videoRes, videoTypeRes, programsRes, initiativesRes] = await Promise.all([
         supabase.from("site_settings").select("value").eq("key", "intro_video_url").maybeSingle(),
+        supabase.from("site_settings").select("value").eq("key", "intro_video_type").maybeSingle(),
         supabase.from("programs").select("*").eq("is_visible", true).order("order_index").limit(4),
         supabase.from("initiatives").select("*").eq("is_visible", true).order("order_index").limit(4),
       ]);
       if (videoRes.data?.value) setVideoUrl(videoRes.data.value);
+      if (videoTypeRes.data?.value) setVideoType(videoTypeRes.data.value);
       if (programsRes.data) setDbPrograms(programsRes.data);
       if (initiativesRes.data) setDbInitiatives(initiativesRes.data);
     };
@@ -187,37 +190,47 @@ const Index = () => {
              transition={{ duration: 0.6 }}
              className="max-w-4xl mx-auto"
            >
-             <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-edu-navy group">
-               {showVideo && videoUrl ? (
-                 <iframe
-                   src={videoUrl
-                     .replace("youtube.com/watch?v=", "youtube.com/embed/")
-                     .replace("youtu.be/", "youtube.com/embed/")
-                     .replace("youtube.com/shorts/", "youtube.com/embed/")
-                   }
-                   className="absolute inset-0 w-full h-full"
-                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                   allowFullScreen
-                   title="فيديو تعريفي بالمبادرة"
-                 />
-               ) : (
-                 <div className="cursor-pointer absolute inset-0" onClick={() => videoUrl && setShowVideo(true)}>
-                   <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
-                   <div className="absolute inset-0 flex items-center justify-center">
-                     <motion.div
-                       whileHover={{ scale: 1.1 }}
-                       whileTap={{ scale: 0.95 }}
-                       className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:bg-white transition-colors"
-                     >
-                       <Play className="w-8 h-8 md:w-10 md:h-10 text-primary mr-[-4px]" fill="currentColor" />
-                     </motion.div>
-                   </div>
-                   <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-edu-navy/90 to-transparent">
-                     <h3 className="text-white text-xl font-bold">فيديو تعريفي بالمبادرة</h3>
-                     <p className="text-white/80 text-sm mt-1">اضغط للمشاهدة</p>
-                   </div>
-                 </div>
-               )}
+              <div className="relative aspect-video rounded-2xl overflow-hidden shadow-2xl bg-edu-navy group">
+                {showVideo && videoUrl ? (
+                  videoType === "upload" ? (
+                    <video
+                      src={videoUrl}
+                      className="absolute inset-0 w-full h-full"
+                      controls
+                      autoPlay
+                      title="فيديو تعريفي بالمبادرة"
+                    />
+                  ) : (
+                    <iframe
+                      src={videoUrl
+                        .replace("youtube.com/watch?v=", "youtube.com/embed/")
+                        .replace("youtu.be/", "youtube.com/embed/")
+                        .replace("youtube.com/shorts/", "youtube.com/embed/")
+                      }
+                      className="absolute inset-0 w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      title="فيديو تعريفي بالمبادرة"
+                    />
+                  )
+                ) : (
+                  <div className="cursor-pointer absolute inset-0" onClick={() => videoUrl && setShowVideo(true)}>
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <motion.div
+                        whileHover={{ scale: 1.1 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:bg-white transition-colors"
+                      >
+                        <Play className="w-8 h-8 md:w-10 md:h-10 text-primary mr-[-4px]" fill="currentColor" />
+                      </motion.div>
+                    </div>
+                    <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-edu-navy/90 to-transparent">
+                      <h3 className="text-white text-xl font-bold">فيديو تعريفي بالمبادرة</h3>
+                      <p className="text-white/80 text-sm mt-1">اضغط للمشاهدة</p>
+                    </div>
+                  </div>
+                )}
              </div>
            </motion.div>
          </div>
@@ -387,19 +400,19 @@ const Index = () => {
           >
             <div className="flex flex-row justify-center gap-3">
               <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-[#d4a017] text-white hover:bg-[#b8890f] font-bold gap-2">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
                   <MessageSquare size={20} />
                   واتساب
                 </Button>
               </a>
               <a href="https://chatgpt.com/g/g-688c9a848f508191bd1b04c19f5652e9-ldhk-lstn-y-m-bd-l-zyz-lkhnyn" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-[#d4a017] text-white hover:bg-[#b8890f] font-bold gap-2">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
                   <Cpu size={20} />
                   تواصل معي ChatGPT
                 </Button>
               </a>
               <a href="https://almobde.com" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-[#d4a017] text-white hover:bg-[#b8890f] font-bold gap-2">
+                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
                   <Globe size={20} />
                   موقع المدرب
                 </Button>
