@@ -389,38 +389,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-gradient-edu">
-        <div className="container-custom text-center px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="flex flex-row justify-center gap-3">
-              <a href="https://wa.me/966555255837" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
-                  <MessageSquare size={20} />
-                  واتساب
-                </Button>
-              </a>
-              <a href="https://chatgpt.com/g/g-688c9a848f508191bd1b04c19f5652e9-ldhk-lstn-y-m-bd-l-zyz-lkhnyn" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
-                  <Cpu size={20} />
-                  تواصل معي ChatGPT
-                </Button>
-              </a>
-              <a href="https://almobde.com" target="_blank" rel="noopener noreferrer">
-                <Button size="lg" className="bg-white text-primary hover:bg-white/90 font-bold gap-2">
-                  <Globe size={20} />
-                  موقع المدرب
-                </Button>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
     </Layout>
   );
 };

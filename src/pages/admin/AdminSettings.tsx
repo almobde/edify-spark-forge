@@ -16,18 +16,21 @@ import { Loader2, Save, Upload } from "lucide-react";
    type: string | null;
  }
  
- const defaultSettings = [
-   { key: "site_name", label: "اسم الموقع", type: "text" },
-   { key: "site_description", label: "وصف الموقع", type: "text" },
-   { key: "contact_email", label: "البريد الإلكتروني", type: "text" },
-   { key: "contact_phone", label: "رقم الهاتف", type: "text" },
-  { key: "intro_video_url", label: "رابط الفيديو التعريفي", type: "text" },
-  { key: "intro_video_type", label: "نوع الفيديو", type: "text" },
-  { key: "facebook_url", label: "رابط فيسبوك", type: "text" },
-   { key: "twitter_url", label: "رابط تويتر", type: "text" },
-   { key: "instagram_url", label: "رابط انستغرام", type: "text" },
-   { key: "youtube_url", label: "رابط يوتيوب", type: "text" },
- ];
+  const defaultSettings = [
+    { key: "site_name", label: "اسم الموقع", type: "text" },
+    { key: "site_description", label: "وصف الموقع", type: "text" },
+    { key: "contact_email", label: "البريد الإلكتروني", type: "text" },
+    { key: "contact_phone", label: "رقم الهاتف", type: "text" },
+    { key: "intro_video_url", label: "رابط الفيديو التعريفي", type: "text" },
+    { key: "intro_video_type", label: "نوع الفيديو", type: "text" },
+    { key: "whatsapp_url", label: "رابط واتساب", type: "text" },
+    { key: "chatgpt_url", label: "رابط تواصل ChatGPT", type: "text" },
+    { key: "trainer_website_url", label: "رابط موقع المدرب", type: "text" },
+    { key: "facebook_url", label: "رابط فيسبوك", type: "text" },
+    { key: "twitter_url", label: "رابط تويتر", type: "text" },
+    { key: "instagram_url", label: "رابط انستغرام", type: "text" },
+    { key: "youtube_url", label: "رابط يوتيوب", type: "text" },
+  ];
  
  export default function AdminSettings() {
   const [settings, setSettings] = useState<Record<string, string>>({});
@@ -197,7 +200,48 @@ import { Loader2, Save, Upload } from "lucide-react";
                </div>
              </CardContent>
            </Card>
- 
+
+            <Card>
+              <CardHeader>
+                <CardTitle>روابط التواصل السريع</CardTitle>
+                <CardDescription>روابط واتساب وشات جي بي تي وموقع المدرب (تظهر في أسفل الصفحة)</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="whatsapp_url">رابط واتساب</Label>
+                    <Input
+                      id="whatsapp_url"
+                      value={settings.whatsapp_url || ""}
+                      onChange={(e) => setSettings({ ...settings, whatsapp_url: e.target.value })}
+                      placeholder="https://wa.me/966555255837"
+                      dir="ltr"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="chatgpt_url">رابط تواصل ChatGPT</Label>
+                    <Input
+                      id="chatgpt_url"
+                      value={settings.chatgpt_url || ""}
+                      onChange={(e) => setSettings({ ...settings, chatgpt_url: e.target.value })}
+                      placeholder="https://chatgpt.com/g/..."
+                      dir="ltr"
+                    />
+                  </div>
+                  <div className="space-y-2 md:col-span-2">
+                    <Label htmlFor="trainer_website_url">رابط موقع المدرب</Label>
+                    <Input
+                      id="trainer_website_url"
+                      value={settings.trainer_website_url || ""}
+                      onChange={(e) => setSettings({ ...settings, trainer_website_url: e.target.value })}
+                      placeholder="https://almobde.com"
+                      dir="ltr"
+                    />
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
             <Card>
               <CardHeader>
                 <CardTitle>الوسائط</CardTitle>
